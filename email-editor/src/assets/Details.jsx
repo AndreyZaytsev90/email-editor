@@ -1,11 +1,11 @@
 import {useState} from "react";
 
 
-export function Details({MENU, isAuth}) {
+export function Details({MENU, isAuth, details, setDetails, handlerLoading}) {
     const [count, setCount] = useState(0)
     return (
         <>
-            <h1>First component</h1>
+            <h1>{details.title}</h1>
             {isAuth ? "Welcome!": "Need auth"}
             {MENU.map((item, index) => {
                 return (
@@ -14,11 +14,20 @@ export function Details({MENU, isAuth}) {
                     </p>
                 )
             })}
+            <div>{details.description}</div>
+            <button  onClick={()=> setDetails(prev => {
+                return {
+                    ...prev,
+                    title: prev.title + '...'
+                }
+            })}>{details.buttonText}</button>
             <div className="card">
                 <button onClick={() => setCount((count) => count + 1)}>
                     count is {count}
                 </button>
             </div>
+
+            <button onClick={handlerLoading}>Loading</button>
         </>
     )
 }
