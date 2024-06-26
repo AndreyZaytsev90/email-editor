@@ -9,6 +9,7 @@ export function App() {
   return (
     <>
       <div>
+          {document.getElementById()}
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
