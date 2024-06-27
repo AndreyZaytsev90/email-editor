@@ -1,8 +1,9 @@
 import styles from './App.module.css'
 import {Details} from "./assets/Details.jsx";
-import {useCallback, useContext, useEffect, useMemo, useRef, useState} from "react";
+import React, {useCallback, useContext, useEffect, useMemo, useRef, useState} from "react";
 import {Header} from "./Header.jsx";
 import {useAuth} from "./hooks/useAuth.js";
+import {Link, useNavigate} from "react-router-dom";
 
 const MENU = [{name: 'add', link: './'}, {name: 'delete', link: './'},]
 
@@ -77,6 +78,13 @@ export function App() {
         getFetchData()
     })
 
+    // Хук useNavigate для непосредственного перевода пользователя на определенный страницу при загрузке приложения
+    const navigate = useNavigate()
+
+    useEffect(()=> {
+        navigate('/about-us')
+    })
+
     return (
         <>
             {/*<div className={styles.layout}>
@@ -108,6 +116,9 @@ export function App() {
                         : <button onClick={() => setIsLoggedIn(true)}>Войти в систему</button>
                 }
             </div>*/}
+            <button>
+                <Link to='/about-us'>Go to about-us</Link>
+            </button>
             {todos.map((t)=> {
                 return (
                     <ul key={t.id}>
@@ -115,6 +126,8 @@ export function App() {
                     </ul>
                 )
             })}
+
+
 
         </>)
 }
