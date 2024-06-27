@@ -60,6 +60,23 @@ export function App() {
     /*const [isLoggedIn, setIsLoggedIn] = useState(false) - // переносим в AuthContext*/
     const {isLoggedIn, setIsLoggedIn} = useAuth() // кастомный хук
 
+    //Запрос на сервер
+    const [todos, setTodos] = useState([])
+
+    useEffect(()=> {
+       /* fetch('https://jsonplaceholder.typicode.com/todos')
+            .then(response => response.json())
+            .then(json => setTodos(json))*/
+
+        const getFetchData = async() => {
+            const response = await fetch('https://jsonplaceholder.typicode.com/todos')
+            const data =  await response.json()
+            setTodos(data)
+        }
+
+        getFetchData()
+    })
+
     return (
         <>
             {/*<div className={styles.layout}>
@@ -82,7 +99,7 @@ export function App() {
             />
 
         </div>*/}
-            <div className={styles.loggedIn}>
+            {/*<div className={styles.loggedIn}>
                 <Header/>
                 <br/>
                 {
@@ -90,7 +107,14 @@ export function App() {
                         ? <button onClick={() => setIsLoggedIn(false)}>Выйти из системы</button>
                         : <button onClick={() => setIsLoggedIn(true)}>Войти в систему</button>
                 }
-            </div>
+            </div>*/}
+            {todos.map((t)=> {
+                return (
+                    <ul key={t.id}>
+                        {t.id} - {t.title}
+                    </ul>
+                )
+            })}
 
         </>)
 }
