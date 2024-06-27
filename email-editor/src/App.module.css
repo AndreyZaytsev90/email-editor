@@ -1,11 +1,19 @@
-#root {
+/*#root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-}
+}*/
 
-.layout {
+/*.layout {
   padding: 20px;
   background-color: #535bf2;
+}*/
+
+.loggedIn {
+  background-color: rebeccapurple;
+  /*width: 100%;
+  min-height: 100vh;*/
+  padding: 2rem 0;
+  text-align: center;
 }

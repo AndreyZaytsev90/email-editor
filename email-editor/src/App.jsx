@@ -1,6 +1,8 @@
 import styles from './App.module.css'
 import {Details} from "./assets/Details.jsx";
-import {useCallback, useEffect, useRef, useState} from "react";
+import {useCallback, useContext, useEffect, useMemo, useRef, useState} from "react";
+import {Header} from "./Header.jsx";
+import {AuthContext} from "./AuthContext.jsx";
 
 const MENU = [{name: 'add', link: './'}, {name: 'delete', link: './'},]
 
@@ -47,10 +49,19 @@ export function App() {
         setDetails(prev => ({...prev, isLoading: !prev.isLoading}))
     }, [])
 
-    const result = count + multi
+    // Хук useMemo для мемоизации сложных вычислений и предотвращения их повторного рендера
+    const result = useMemo(() => {
+        return count * multi
+    }, [count, multi])
 
-    return (<>
-        <div className={styles.layout}>
+    //Хук useContext чтобы не прокидывать пропсы в компоненты каждый раз
+
+    /*const [isLoggedIn, setIsLoggedIn] = useState(false) - // переносим в AuthContext*/
+    const {isLoggedIn, setIsLoggedIn} = useContext(AuthContext)
+
+    return (
+        <>
+            {/*<div className={styles.layout}>
             <img ref={imageRef} src="/react.svg" width={300} alt=""/>
             <br/>
             <div>Результат: {result}</div>
@@ -69,7 +80,17 @@ export function App() {
                      handlerLoading={handlerLoading}
             />
 
-        </div>
-    </>)
+        </div>*/}
+            <div className={styles.loggedIn}>
+                <Header/>
+                <br/>
+                {
+                    isLoggedIn
+                        ? <button onClick={() => setIsLoggedIn(false)}>Выйти из системы</button>
+                        : <button onClick={() => setIsLoggedIn(true)}>Войти в систему</button>
+                }
+            </div>
+
+        </>)
 }
 

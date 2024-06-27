@@ -1,7 +1,7 @@
-import {useState} from "react";
+import {memo, useState} from "react";
 
 
-export function Details({MENU, isAuth, details, setDetails, handlerLoading}) {
+function InitialDetails({MENU, isAuth, details, setDetails, handlerLoading}) {
     const [count, setCount] = useState(0)
     return (
         <>
@@ -31,3 +31,5 @@ export function Details({MENU, isAuth, details, setDetails, handlerLoading}) {
         </>
     )
 }
+
+export const Details = memo(InitialDetails)
