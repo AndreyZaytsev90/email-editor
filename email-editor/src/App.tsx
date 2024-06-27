@@ -1,13 +1,14 @@
-import styles from './App.module.css'
-import {Details} from "./assets/Details.jsx";
-import React, {useCallback, useContext, useEffect, useMemo, useRef, useState} from "react";
+import styles from "./App.module.css"
+/*import {Details} from "./assets/Details.jsx";*/
+import {/*useCallback, */useEffect, useMemo, useRef, useState} from "react";
 import {Header} from "./Header.jsx";
 import {useAuth} from "./hooks/useAuth.js";
 import {Link, useNavigate} from "react-router-dom";
+import {TodosItem} from "./types";
 
-const MENU = [{name: 'add', link: './'}, {name: 'delete', link: './'},]
+/*const MENU = [{name: 'add', link: './'}, {name: 'delete', link: './'},]
 
-const isAuth = true
+const isAuth = true*/
 
 export function App() {
     /*const [title, setTitle] = useState('')
@@ -35,20 +36,20 @@ export function App() {
     // Хук useRef для привязки в любому элементу дом-дерева и последующего взаимодействия с ним
     const imageRef = useRef(null)
 
-    const onClick = () => {
+ /*   const onClick = () => {
         console.log(imageRef.current)
         if (!imageRef.current) return
         imageRef.current.style.backgroundColor = 'blue'
         imageRef.current.style.borderRadius = '20px'
         imageRef.current.style.boxShadow = '0 3px 6px rgba(0,0,0, .8)'
 
-    }
+    }*/
 
     // Хук useCallback для кэширования и оптимизации отрисовки
 
-    const handlerLoading = useCallback(() => {
+  /*  const handlerLoading = useCallback(() => {
         setDetails(prev => ({...prev, isLoading: !prev.isLoading}))
-    }, [])
+    }, [])*/
 
     // Хук useMemo для мемоизации сложных вычислений и предотвращения их повторного рендера
 
@@ -62,7 +63,7 @@ export function App() {
     const {isLoggedIn, setIsLoggedIn} = useAuth() // кастомный хук
 
     //Запрос на сервер
-    const [todos, setTodos] = useState([])
+    const [todos, setTodos] = useState<TodosItem[]>([])
 
     useEffect(()=> {
        /* fetch('https://jsonplaceholder.typicode.com/todos')
@@ -85,9 +86,18 @@ export function App() {
         navigate('/about-us')
     })
 
+
+    //Паттерны проектирования frontend-приложений
+
+    //Feature-Sliced Design (FSD): Методология, предназначенная для структурирования фронтенд-проектов по "слоям" и "фичам", что облегчает масштабирование и сопровождение сложных приложений.
+
+    // Feature-Based Structure (FBS): Подход, при котором организация кода ведется вокруг функциональности (фич), а не по типам файлов или слоям, что повышает когерентность и упрощает модульное тестирование.
+
+    // Atomic Design: Методология разработки пользовательского интерфейса, которая использует аналогии с химией для организации компонентной архитектуры, от атомов до шаблонов страниц.
+
     return (
         <>
-            {/*<div className={styles.layout}>
+            <div className={styles.layout}>
             <img ref={imageRef} src="/react.svg" width={300} alt=""/>
             <br/>
             <div>Результат: {result}</div>
@@ -96,26 +106,27 @@ export function App() {
 
             <br/>
             <br/>
-            <button onClick={onClick}>Change image</button>
+                {/*function onClick*/}
+            <button onClick={()=> {}}>Change image</button>
             {details.isLoading && <p>Loading...</p>}
 
-            <Details MENU={MENU}
+            {/*<Details MENU={MENU}
                      isAuth={isAuth}
                      details={details}
                      setDetails={setDetails}
                      handlerLoading={handlerLoading}
-            />
+            />*/}
 
-        </div>*/}
-            {/*<div className={styles.loggedIn}>
+        </div>
+            <div className={styles.loggedIn}>
                 <Header/>
                 <br/>
                 {
                     isLoggedIn
-                        ? <button onClick={() => setIsLoggedIn(false)}>Выйти из системы</button>
-                        : <button onClick={() => setIsLoggedIn(true)}>Войти в систему</button>
+                        ? <button onClick={() => setIsLoggedIn ? setIsLoggedIn(false) : ''}>Выйти из системы</button>
+                        : <button onClick={() => setIsLoggedIn ? setIsLoggedIn(true) : ''}>Войти в систему</button>
                 }
-            </div>*/}
+            </div>
             <button>
                 <Link to='/about-us'>Go to about-us</Link>
             </button>
@@ -126,9 +137,6 @@ export function App() {
                     </ul>
                 )
             })}
-
-
-
         </>)
 }
 

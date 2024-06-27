@@ -1,7 +1,16 @@
 import {memo, useState} from "react";
+import {DetailsItem, MenuItem} from "../types";
+
+interface DetailsPropsType {
+    MENU: MenuItem[],
+    isAuth: boolean,
+    details: DetailsItem,
+    handlerLoading: () => void,
+    setDetails: (updateFunc: (prevState: DetailsItem) => DetailsItem) => void
+}
 
 
-function InitialDetails({MENU, isAuth, details, setDetails, handlerLoading}) {
+function InitialDetails({MENU, isAuth, details, setDetails, handlerLoading}: DetailsPropsType) {
     const [count, setCount] = useState(0)
     return (
         <>

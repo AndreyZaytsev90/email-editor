@@ -8,10 +8,13 @@ import {
     RouterProvider,
 } from "react-router-dom";
 
+const rootElement = document.getElementById('root')
+if (!rootElement) throw new Error("Failed to find the root element")
+
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <App />,
+        element: <App/>,
         errorElement: <div>404 Not found!</div>,
     },
     {
@@ -20,7 +23,7 @@ const router = createBrowserRouter([
     }
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
         <AuthProvider>
             {/*<App />*/}
