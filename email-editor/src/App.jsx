@@ -2,7 +2,7 @@ import styles from './App.module.css'
 import {Details} from "./assets/Details.jsx";
 import {useCallback, useContext, useEffect, useMemo, useRef, useState} from "react";
 import {Header} from "./Header.jsx";
-import {AuthContext} from "./AuthContext.jsx";
+import {useAuth} from "./hooks/useAuth.js";
 
 const MENU = [{name: 'add', link: './'}, {name: 'delete', link: './'},]
 
@@ -50,14 +50,15 @@ export function App() {
     }, [])
 
     // Хук useMemo для мемоизации сложных вычислений и предотвращения их повторного рендера
+
     const result = useMemo(() => {
         return count * multi
     }, [count, multi])
 
-    //Хук useContext чтобы не прокидывать пропсы в компоненты каждый раз
+    // Хук useContext чтобы не прокидывать пропсы в компоненты каждый раз
 
     /*const [isLoggedIn, setIsLoggedIn] = useState(false) - // переносим в AuthContext*/
-    const {isLoggedIn, setIsLoggedIn} = useContext(AuthContext)
+    const {isLoggedIn, setIsLoggedIn} = useAuth() // кастомный хук
 
     return (
         <>
