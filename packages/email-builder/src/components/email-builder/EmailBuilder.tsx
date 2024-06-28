@@ -1,31 +1,47 @@
-
 import styles from "./EmailBuilder.module.scss"
 import {Bold, Eraser, Italic, Underline} from "lucide-react";
+import {useRef, useState} from "react";
 
 export function EmailBuilder() {
 
+    const [text, setText] = useState(`In the heart of a dense forest, where the thick canopy barely let any sunlight pierce through, a small stream glistened like a silver ribbon. Its serene flow was occasionally disturbed by a fish leaping out of the water or a leaf gently landing on its surface. Alongside the stream, a variety of creatures went about their day. A squirrel was busy stocking up acorns, moving with incredible agility from one tree to another. Birds sung in a harmonious melody, their tunes creating a symphony that only nature could orchestrate.`)
 
-  return (
-    <div>
-      <h1>Email builder</h1>
-      <div className={styles.card}>
-          <div className={styles.editor}>
-              In the heart of a dense forest, where the thick canopy barely let any sunlight pierce through, a small stream glistened like a silver ribbon. Its serene flow was occasionally disturbed by a fish leaping out of the water or a leaf gently landing on its surface. Alongside the stream, a variety of creatures went about their day. A squirrel was busy stocking up acorns, moving with incredible agility from one tree to another. Birds sung in a harmonious melody, their tunes creating a symphony that only nature could orchestrate.
-          </div>
-          <div className={styles.actions}>
-              <div className={styles.tools}>
-                    <button><Eraser size={17}/></button>
-                    <button><Bold size={17}/></button>
-                    <button><Italic size={17}/></button>
-                    <button><Underline size={17}/></button>
+    const textRef = useRef<HTMLTextAreaElement | null>(null)
+    const getSelectionText = () => {
+        if(!textRef.current) return
+        const cursorStart = textRef.current?.selectionStart
+        const cursorEnd = textRef.current?.selectionEnd
+        const selectionText = text.substring(cursorStart,cursorEnd)
+       if (!selectionText) return;
+    }
 
-              </div>
-              <button>Send now</button>
-          </div>
+    return (
+        <div>
+            <h1>Email builder</h1>
+            <div className={styles.card}>
+          <textarea
+              ref={textRef}
+              className={styles.editor}
+              onClick={getSelectionText}
+              value={text}
+              onChange={e=> setText(e.target.value)}
+          >
+              {text}
+          </textarea>
+                <div className={styles.actions}>
+                    <div className={styles.tools}>
+                        <button onClick={()=> setText('')}><Eraser size={17}/></button>
+                        <button><Bold size={17}/></button>
+                        <button><Italic size={17}/></button>
+                        <button><Underline size={17}/></button>
 
-      </div>
+                    </div>
+                    <button>Send now</button>
+                </div>
 
-    </div>
-  )
+            </div>
+
+        </div>
+    )
 }
 
