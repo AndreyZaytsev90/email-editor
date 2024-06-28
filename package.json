@@ -1,0 +1,25 @@
+{
+  "name": "email-studio",
+  "version": "1.0.0",
+  "main": "index.js",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreyZaytsev90/email-editor.git"
+  },
+  "keywords": [
+    "test-project"
+  ],
+  "author": "me",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndreyZaytsev90/email-editor/issues"
+  },
+  "homepage": "https://github.com/AndreyZaytsev90/email-editor#readme",
+  "description": ""
+}
