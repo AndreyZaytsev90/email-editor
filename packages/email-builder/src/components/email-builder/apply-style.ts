@@ -1,11 +1,13 @@
-export const applyFormat = (
-    type: 'bold' | 'italic' | 'underline',
+export type applyStylePropsType = 'bold' | 'italic' | 'underline'
+
+export const applyStyle = (
+    type: applyStylePropsType,
     selectedText: string
 ) => {
 let formattedText = selectedText
 
     switch (type) {
-        case "bold":
+        case 'bold':
             formattedText = '<b>'+ selectedText +'</b>'
             break
         case "italic":
